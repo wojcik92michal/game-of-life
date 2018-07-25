@@ -1,0 +1,98 @@
+$lifeDotSize: 20px;
+$historyDotSize: 3px;
+
+.game {
+    margin: 30px;
+    margin-top: 0px;
+    text-align: center;
+
+    .board {
+        margin: auto;
+        border-collapse: collapse;
+
+        .cell {
+            border: 1px solid black;
+            height: $lifeDotSize;
+            width: $lifeDotSize;
+
+            &.alive {
+                background-color: red;
+            }
+        }
+    }
+
+    .board.history-board {
+        .cell {
+            height: $historyDotSize;
+            width: $historyDotSize;
+        }
+    }
+
+    .paragraph-title {
+        font-weight: bold;
+    }
+
+    input {
+        margin-right: 10px;
+    }
+
+    .button-controls {
+        margin-bottom: 20px;
+    }
+
+    .stats {
+        .stats-wrap {
+            margin: 20px;
+            display: inline-block;
+        }
+
+        .stat-label {
+            font-weight: bold;
+        }
+    }
+
+    .button-controls {
+        margin-bottom: 20px;
+    }
+
+    .set-board-size-wrap {
+        .input-wrap {
+            display: inline-block;
+            margin: auto;
+            margin-bottom: 10px;
+        }
+    }
+
+    .history {
+        .game-size {
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        .history-item {
+            position: relative;
+            display: inline-block;
+            margin: 0px 10px;
+            vertical-align: middle;
+            margin-bottom: 20px;
+            cursor: pointer;
+
+
+            .delete-wrap {
+                position: absolute;
+                width: 100%;
+                bottom: 0px;
+                background-color: #323232;
+                color: white;
+                height: 0px;
+                transition: 0.5s;
+                overflow: hidden;
+            }
+
+            &:hover .delete-wrap {
+                padding: 5px 0px;
+                height: 20px;
+            }
+        }
+    }
+}

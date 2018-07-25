@@ -1,0 +1,74 @@
+<div class="game">
+    <table class="board">
+        <tr class="row" *ngFor="let row of gameCells.currentCells; index as i">
+            <td class="cell" *ngFor="let cell of row; index as j" (click)="cellClick(i,j)" [ngClass]="{'alive':cell === true}">
+            </td>
+        </tr>
+    </table>
+
+    <div class="stats">
+        <span class="stats-wrap">
+            <span class="stat-label">Moves: </span>{{stepsNum}}
+        </span>
+        <span class="stats-wrap">
+            <span class="stat-label">Living cells: </span>{{gameCells.livingCellsCounter}}
+        </span>
+        <span class="stats-wrap">
+            <span class="stat-label">Interval (in miliseconds):</span> {{intervalInMiliseconds}}
+        </span>
+    </div>
+
+    <div class="controls">
+        <div class="button-controls">
+            <button class="fixed-button" (click)="nextStep()">Next step</button>
+            <button class="fixed-button" (click)="clearGame()">Clear</button>
+            <button class="fixed-button" (click)="resetGame()">Reset</button>
+            <button class="fixed-button" (click)="saveGame()">Save</button>
+            <div>
+                <button class="fixed-button" *ngIf="!isAuto" (click)="autoStart()">Start</button>
+                <button class="fixed-button" *ngIf="isAuto" (click)="autoStop()">Stop</button>
+            </div>
+        </div>
+
+        <div>
+            <p class="paragraph-title">Set interval</p>
+            <input type="number" min="100" [(ngModel)]="newIntervalInMiliseconds" />
+            <button (click)="saveIntervalClick()">Apply</button>
+        </div>
+
+        <div class="set-board-size-wrap">
+            <p class="paragraph-title">Set board size (minimum value: {{boardMinimumSize}})</p>
+
+            <div class="input-wrap">
+                <p>
+                    Height
+                </p>
+                <input type="number" [min]="boardMinimumSize" [(ngModel)]="newBoardHeight" placeholder="Height" />
+            </div>
+
+            <div class="input-wrap">
+                <p>
+                    Width
+                </p>
+                <input type="number" [min]="boardMinimumSize" [(ngModel)]="newBoardWidth" placeholder="Width" />
+            </div>
+            <button (click)="saveBoardSize()">Apply</button>
+        </div>
+    </div>
+
+    <div class="history">
+        <div class="history-item" *ngFor="let savedGame of savedGames; index as i">
+            <span class="game-size">{{savedGame.currentBoardHeight}}x{{savedGame.currentBoardWidth}}</span>
+            <table class="board history-board" (click)="loadSavedGame(i)">
+                <tr class="row" *ngFor="let row of savedGame.currentCells">
+                    <td class="cell" *ngFor="let cell of row" [ngClass]="{'alive':cell === true}">
+                    </td>
+                </tr>
+            </table>
+            <div class="delete-wrap" (click)="deleteSavedGame(i)">
+                <span>Delete?</span>
+            </div>
+        </div>
+    </div>
+
+</div>
